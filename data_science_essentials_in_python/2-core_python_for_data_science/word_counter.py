@@ -12,9 +12,12 @@ import urllib.request
 def main():
     assert sys.argv[1] is not None
     url = sys.argv[1]
-    # with urllib.request.urlopen(url) as doc:
-    r = requests.get(url)
-    html = r.text
+    # One could use either urllib or requests
+    # the book shows how to use urllib here, but requests is better
+    # (ie more concise)
+    # r = requests.get(url)
+    with urllib.request.urlopen(url) as doc:
+        html = doc.read().decode().lower()
     word_list = re.findall('\w+', html)
     counter = Counter(word_list)
     most_common = counter.most_common(10)
