@@ -43,8 +43,15 @@ def main():
         for key, value in sorted(index.items()):
             oFile.write('%s: %s\n' % (key, value))
 
+    # extra: now load the pickled index and write it out as text
+    with open('index.pickle', 'rb') as f:
+        upickled_index = pickle.load(f)
+    with open('upickled_index.txt', 'w') as oFile:
+        for key, value in sorted(index.items()):
+            oFile.write('%s: %s\n' % (key, value))
 
-
+    # now index.txt and upicked_index.txt can be verified to be the same
+    # by using the diff command: "diff index.txt upicked_index.txt"
 
 def get_files_in_dir(dir_path):
     items = listdir(dir_path)
